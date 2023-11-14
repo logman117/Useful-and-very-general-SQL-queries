@@ -1,0 +1,6 @@
+SELECT tables.name AS TableName, 
+       SUM(partitions.rows) AS RowCounts
+FROM sys.tables
+JOIN sys.partitions ON tables.object_id = partitions.object_id
+WHERE partitions.index_id IN (0,1) -- 0:Heap, 1:Clustered
+GROUP BY tables.name;
